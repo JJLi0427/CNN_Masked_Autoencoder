@@ -29,5 +29,11 @@ matplotlib
 * `PATCH_SIZE`: Size of the image patches for masking
 * `MASK_RATE`: Percentage of image patches to mask
 
+## Effect display
+* We train the moedle 100 epochs, save the train loss and test loss  
+![Train loss image](./image_loss.png "Train loss image")
+* Save the model reconstruct comparsion to the original image every 10 epochs  
+![Comparsion every 10 epochs](./show_per_10epoch.png "Comparsion every 10 epochs")
+
 ## Related Blogs
 <https://blog.csdn.net/lijj0304/article/details/136597791>
