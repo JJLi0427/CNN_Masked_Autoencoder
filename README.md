@@ -31,9 +31,9 @@ matplotlib
 
 ## Effect display
 * We train the moedle 100 epochs, save the train loss and test loss  
-![Train loss image](./image_loss.png "Train loss image")
+![Train loss image](./display/image_loss.png "Train loss image")
 * Save the model reconstruct comparsion to the original image every 10 epochs  
-![Comparsion every 10 epochs](./show_per_10epoch.png "Comparsion every 10 epochs")
+![Comparsion every 10 epochs](./display/show_per_10epoch.png "Comparsion every 10 epochs")
 
 ## Related Blog
 <https://blog.csdn.net/lijj0304/article/details/136597791>
