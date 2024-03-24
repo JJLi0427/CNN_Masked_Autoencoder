@@ -35,5 +35,5 @@ matplotlib
 * Save the model reconstruct comparsion to the original image every 10 epochs  
 ![Comparsion every 10 epochs](./show_per_10epoch.png "Comparsion every 10 epochs")
 
-## Related Blogs
+## Related Blog
 <https://blog.csdn.net/lijj0304/article/details/136597791>
