@@ -1,4 +1,4 @@
-./ckpt
-./data
-./figure
-__pycache__
+ckpt/
+data/
+figure/
+__pycache__/
