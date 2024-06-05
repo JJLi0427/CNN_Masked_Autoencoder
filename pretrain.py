@@ -9,6 +9,22 @@ from datasets import getdataset, mask_image
 from utils import visualize_pretrain, loss_figure, set_logger, set_seed
 
 
+def get_args():
+    # define some parameters
+    parser = argparse.ArgumentParser(description='Pretrain')
+    parser.add_argument('--epoch', type=int, default=100, help='Number of epochs')
+    parser.add_argument('--batch_size', type=int, default=256, help='Batch size')
+    parser.add_argument('--lr', type=float, default=0.001, help='Learning rate')
+    parser.add_argument('--show_per_epoch', type=int, default=10, help='Show per epoch')
+    parser.add_argument('--show_img_count', type=int, default=2, help='Show image count')
+    parser.add_argument('--patch_size', type=int, default=2, help='Patch size')
+    parser.add_argument('--mask_rate', type=float, default=0.75, help='Mask rate')
+    parser.add_argument('--save_every', type=int, default=10, help='Save every n epoch')
+    parser.add_argument('--seed', type=int, default=0, help='Random seed')
+    args = parser.parse_args()
+    return args
+
+
 def train(
     model, 
     optimizer, 
@@ -67,22 +83,6 @@ def test(
                     # Save the comparison image
     avgloss = np.mean(testing_loss)
     return compare, avgloss
-
-
-def get_args():
-    # define some parameters
-    parser = argparse.ArgumentParser(description='AutoEncoder')
-    parser.add_argument('--epoch', type=int, default=100, help='Number of epochs')
-    parser.add_argument('--batch_size', type=int, default=128, help='Batch size')
-    parser.add_argument('--lr', type=float, default=0.001, help='Learning rate')
-    parser.add_argument('--show_per_epoch', type=int, default=10, help='Show per epoch')
-    parser.add_argument('--show_img_count', type=int, default=2, help='Show image count')
-    parser.add_argument('--patch_size', type=int, default=2, help='Patch size')
-    parser.add_argument('--mask_rate', type=float, default=0.75, help='Mask rate')
-    parser.add_argument('--save_every', type=int, default=10, help='Save every n epoch')
-    parser.add_argument('--seed', type=int, default=0, help='Random seed')
-    args = parser.parse_args()
-    return args
 
 
 def get_mask_params(batch_img, args):

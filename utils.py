@@ -3,7 +3,6 @@ import os
 import matplotlib.pyplot as plt
 from torchvision.utils import save_image
 import logging
-import time
 import random
 import numpy as np
 
@@ -14,9 +13,8 @@ def visualize_pretrain(
     show_img_count, 
 ):
     os.makedirs('./figure', exist_ok=True)
-    timestamp = time.strftime('%Y%m%d%H%M%S', time.localtime())
     all_comparisons = torch.cat(comparison, dim=0)
-    name = './figure/show_per' + str(show_per_epoch) + 'epoch_' + str(timestamp) + '.png'
+    name = './figure/show_per' + str(show_per_epoch) + 'epoch' + '.png'
     save_image(all_comparisons.cpu(), name, nrow=show_img_count*3)
 
 
@@ -27,13 +25,12 @@ def loss_figure(
     mode
 ):
     os.makedirs('./figure', exist_ok=True)
-    timestamp = time.strftime('%Y%m%d%H%M%S', time.localtime())
     if mode == 'pretrain':
         title = 'Image MSE Loss'
-        figure_path = f'./figure/pretrain_loss_{timestamp}.png'
+        figure_path = './figure/pretrain_loss.png'
     elif mode == 'finetune':
         title = 'Cross Entropy Loss'
-        figure_path = f'./figure/finetune_loss_{timestamp}.png'
+        figure_path = './figure/finetune_loss.png'
     else:
         raise ValueError('Invalid mode')
     
@@ -50,7 +47,6 @@ def loss_figure(
 
 def set_logger(mode):
     os.makedirs('./ckpt', exist_ok=True)
-    
     if mode == 'pretrain':
         filename = './ckpt/pretrain.log'
     elif mode == 'finetune':

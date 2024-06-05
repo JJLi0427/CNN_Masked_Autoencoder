@@ -6,6 +6,21 @@ from datasets import getdataset
 from model import AutoEncoder, Classifier
 from utils import loss_figure, set_logger, set_seed
 
+
+def get_args():
+    # define some parameters
+    parser = argparse.ArgumentParser(description='Finetune')
+    parser.add_argument('--epoch', type=int, default=100, help='Number of epochs')
+    parser.add_argument('--batch_size', type=int, default=256, help='Batch size')
+    parser.add_argument('--lr', type=float, default=0.001, help='Learning rate')
+    parser.add_argument('--num_classes', type=int, default=10, help='Number of classes')
+    parser.add_argument('--model_path', type=str, default='ckpt/pretrain_100ep.pth', help='Model path')
+    parser.add_argument('--save_every', type=int, default=1, help='Save every n epoch')
+    parser.add_argument('--seed', type=int, default=0, help='Random seed')
+    args = parser.parse_args()
+    return args
+
+
 def train(
     model, 
     optimizer, 
@@ -51,27 +66,11 @@ def test(
 def init_model(num_classes, model_path):
     autoencoder = AutoEncoder()
     autoencoder.load_state_dict(torch.load(model_path))
-    autoencoder = autoencoder
-    
     # freeze the encoder
     for param in autoencoder.encoder.parameters():
         param.requires_grad = False
     model = Classifier(autoencoder.encoder, num_classes)
     return model
-
-
-def get_args():
-    # define some parameters
-    parser = argparse.ArgumentParser(description='AutoEncoder')
-    parser.add_argument('--epoch', type=int, default=100, help='Number of epochs')
-    parser.add_argument('--batch_size', type=int, default=128, help='Batch size')
-    parser.add_argument('--lr', type=float, default=0.001, help='Learning rate')
-    parser.add_argument('--num_classes', type=int, default=10, help='Number of classes')
-    parser.add_argument('--model_path', type=str, default='ckpt/pretrain_100ep.pth', help='Model path')
-    parser.add_argument('--save_every', type=int, default=10, help='Save every n epoch')
-    parser.add_argument('--seed', type=int, default=0, help='Random seed')
-    args = parser.parse_args()
-    return args
 
 
 def finetune():
@@ -111,7 +110,7 @@ def finetune():
         
         logging.info(f'Epoch: {epoch + 1:3d} | train loss: {train_loss:.6f} | test loss: {test_loss:.6f}')
         if (epoch+1) % args.save_every == 0:
-            torch.save(model.state_dict(), f'ckpt/finetun_{epoch+1}.pth')
+            torch.save(model.state_dict(), f'./ckpt/finetune_{epoch+1}ep.pth')
             
     loss_figure(
         train_loss_list, 
