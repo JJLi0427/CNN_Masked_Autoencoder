@@ -1,7 +1,9 @@
 # CNN_Masked_Autoencoder
+
 This repository contains a PyTorch implementation of an autoencoder for image reconstruction using the MNIST dataset. The autoencoder model is designed to mask images with random patches and then reconstruct the original images from the masked inputs.
 
 ## Requirements
+
 Python 3.x
 PyTorch
 torchvision
@@ -9,18 +11,20 @@ numpy
 matplotlib
 
 ## Usage
+
 1. Clone the repository
 2. cd CNN_Autoencoder
 3. Install the required dependencies: `pip install -r requirements.txt`
 4. Run the main script: `python came.py`  
 5. Monitor the training process:
-* The script will train the autoencoder model over multiple epochs, displaying the training and testing loss for each epoch.  
-* Additionally, it will save comparison images showing the original, masked, and reconstructed images.
+    * The script will train the autoencoder model over multiple epochs, displaying the training and testing loss for each epoch.  
+    * Additionally, it will save comparison images showing the original, masked, and reconstructed images.
 6. Check the output:
-* The comparison images for selected epochs will be saved as show_per_<SHOW_PER_EPOCH>epoch.png.  
-* The loss curve plot will be saved as image_loss.png.
+    * The comparison images for selected epochs will be saved as show_per_<SHOW_PER_EPOCH>epoch.png.  
+    * The loss curve plot will be saved as image_loss.png.
 
 ## Parameters
+
 * `EPOCH_COUNT`: Number of epochs for training
 * `BATCH_SIZE`: Batch size for training
 * `LR`: Learning rate for the optimizer
@@ -30,10 +34,12 @@ matplotlib
 * `MASK_RATE`: Percentage of image patches to mask
 
 ## Effect display
+
 * We train the moedle 100 epochs, save the train loss and test loss  
 ![Train loss image](./display/image_loss.png "Train loss image")
 * Save the model reconstruct comparsion to the original image every 10 epochs  
 ![Comparsion every 10 epochs](./display/show_per_10epoch.png "Comparsion every 10 epochs")
 
 ## Related Blog
+
 <https://blog.csdn.net/lijj0304/article/details/136597791>

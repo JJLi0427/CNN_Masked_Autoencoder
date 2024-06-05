@@ -1,5 +1,6 @@
 from torch import nn
 
+
 # ----------------------------------------------------------------
 # define the model
 class ResidualBlock(nn.Module):
@@ -17,6 +18,7 @@ class ResidualBlock(nn.Module):
         out += residual
         out = self.relu(out)
         return out
+
 
 class AutoEncoder(nn.Module):
     def __init__(self):
@@ -52,3 +54,21 @@ class AutoEncoder(nn.Module):
         encoded = self.encoder(x)
         decoded = self.decoder(encoded)
         return encoded, decoded
+    
+    
+class Classifier(nn.Module):
+    def __init__(self, encoder, num_classes):
+        super(Classifier, self).__init__()
+        dim = 8*2*2 # 8*2*2 is the output shape of encoder
+        self.encoder = encoder
+        self.classifier = nn.Sequential(
+            nn.Linear(dim, dim),  
+            nn.ReLU(True),
+            nn.Linear(dim, num_classes),
+        )
+
+    def forward(self, x):
+        x = self.encoder(x)
+        x = x.view(x.size(0), -1)  # flatten the tensor
+        x = self.classifier(x)
+        return x
