@@ -1,4 +1,4 @@
-# CNN_Autoencoder
+# CNN_Masked_Autoencoder
 This repository contains a PyTorch implementation of an autoencoder for image reconstruction using the MNIST dataset. The autoencoder model is designed to mask images with random patches and then reconstruct the original images from the masked inputs.
 
 ## Requirements
