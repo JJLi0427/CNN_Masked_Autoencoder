@@ -48,9 +48,11 @@ def loss_figure(
 def set_logger(mode):
     os.makedirs('./ckpt', exist_ok=True)
     if mode == 'pretrain':
-        filename = './ckpt/pretrain.log'
+        os.makedirs('./ckpt/pretrain', exist_ok=True)
+        filename = './ckpt/pretrain/pretrain.log'
     elif mode == 'finetune':
-        filename = './ckpt/finetune.log'
+        os.makedirs('./ckpt/finetune', exist_ok=True)
+        filename = './ckpt/finetune/finetune.log'
     else:
         raise ValueError('Invalid mode')
 

@@ -155,7 +155,7 @@ def pretrain():
         
         logging.info(f'Epoch: {epoch + 1:3d} | train loss: {train_loss:.6f} | test loss: {test_loss:.6f}')
         if (epoch+1) % args.save_every == 0:
-            torch.save(model.state_dict(), f'./ckpt/pretrain_{epoch+1}ep.pth')
+            torch.save(model.state_dict(), f'./ckpt/pretrain/{epoch+1}epoch.pth')
 
     visualize_pretrain(
         comparison, 

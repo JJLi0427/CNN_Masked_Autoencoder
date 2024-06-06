@@ -14,8 +14,8 @@ def get_args():
     parser.add_argument('--batch_size', type=int, default=256, help='Batch size')
     parser.add_argument('--lr', type=float, default=0.001, help='Learning rate')
     parser.add_argument('--num_classes', type=int, default=10, help='Number of classes')
-    parser.add_argument('--model_path', type=str, default='ckpt/pretrain_100ep.pth', help='Model path')
-    parser.add_argument('--save_every', type=int, default=1, help='Save every n epoch')
+    parser.add_argument('--model_path', type=str, default='ckpt/pretrain/100epoch.pth', help='Model path')
+    parser.add_argument('--save_every', type=int, default=10, help='Save every n epoch')
     parser.add_argument('--seed', type=int, default=0, help='Random seed')
     args = parser.parse_args()
     return args
@@ -110,7 +110,7 @@ def finetune():
         
         logging.info(f'Epoch: {epoch + 1:3d} | train loss: {train_loss:.6f} | test loss: {test_loss:.6f}')
         if (epoch+1) % args.save_every == 0:
-            torch.save(model.state_dict(), f'./ckpt/finetune_{epoch+1}ep.pth')
+            torch.save(model.state_dict(), f'./ckpt/finetune/{epoch+1}epoch.pth')
             
     loss_figure(
         train_loss_list, 

@@ -54,7 +54,7 @@ class AutoEncoder(nn.Module):
         encoded = self.encoder(x)
         decoded = self.decoder(encoded)
         return encoded, decoded
-    
+
     
 class Classifier(nn.Module):
     def __init__(self, encoder, num_classes):
