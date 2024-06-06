@@ -1,45 +1,36 @@
 # CNN_Masked_Autoencoder
 
-This repository contains a PyTorch implementation of an autoencoder for image reconstruction using the MNIST dataset. The autoencoder model is designed to mask images with random patches and then reconstruct the original images from the masked inputs.
+This repository focuses on a masked autoencoder based on a Convolutional Neural Network (CNN). Initially, it is used for self-supervised learning to extract features from the MNIST dataset by reconstructing masked images. Subsequently, the encoder of the network is employed for downstream classification tasks. After fine-tuning, it yields remarkable results.
 
-## Requirements
+## Model Structure 
 
-Python 3.x
-PyTorch
-torchvision
-numpy
-matplotlib
+![Model](./display/model.png)
+
+The design involves two stages of work. In the first stage, the model masks the input image and pretrains an autoencoder to reconstruct it. In the second stage, a pretrained encoder is used to encode the full image, with its parameters frozen, and a classification network is trained.
+
+## Work Display
+
+**Pretrain the masked autoencoder moedel 100 epochs, save the loss curve and visualize reconstruction process.**     
+![Pretrain](./display/pretrain.png)
+**Finetune the pretrain encoder, save the loss and model score curve. Show a model classify sample.**  
+![Finetune](./display/finetune.png)
 
 ## Usage
 
-1. Clone the repository
-2. cd CNN_Autoencoder
-3. Install the required dependencies: `pip install -r requirements.txt`
-4. Run the main script: `python came.py`  
-5. Monitor the training process:
-    * The script will train the autoencoder model over multiple epochs, displaying the training and testing loss for each epoch.  
-    * Additionally, it will save comparison images showing the original, masked, and reconstructed images.
-6. Check the output:
-    * The comparison images for selected epochs will be saved as show_per_<SHOW_PER_EPOCH>epoch.png.  
-    * The loss curve plot will be saved as image_loss.png.
+```python
+cd CNN_Masked_Autoencoder
+pip install -r requirements.txt
+python pretrain.py
+python finetune.py
+python analyze.py
+```
 
-## Parameters
+**NOTE:**  
 
-* `EPOCH_COUNT`: Number of epochs for training
-* `BATCH_SIZE`: Batch size for training
-* `LR`: Learning rate for the optimizer
-* `SHOW_PER_EPOCH`: Frequency of displaying results per epoch
-* `SHOW_IMG_COUNT`: Number of images to display in the comparison
-* `PATCH_SIZE`: Size of the image patches for masking
-* `MASK_RATE`: Percentage of image patches to mask
+1. It will auto download the dataset.
+2. Model will save in `./ckpt/pretrain` and `./ckpt/finetune`.
+3. In `./figure` floder you can see analyze img.
 
-## Effect display
+## Idea From
 
-* We train the moedle 100 epochs, save the train loss and test loss  
-![Train loss image](./display/image_loss.png "Train loss image")
-* Save the model reconstruct comparsion to the original image every 10 epochs  
-![Comparsion every 10 epochs](./display/show_per_10epoch.png "Comparsion every 10 epochs")
-
-## Related Blog
-
-<https://blog.csdn.net/lijj0304/article/details/136597791>
+<https://arxiv.org/abs/2111.06377>

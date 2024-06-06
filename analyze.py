@@ -57,6 +57,7 @@ def score_analyze(test_loader, args):
     precision_list = []
     recall_list = []
     f1_list = []
+    epoch_list = []  # New list to store the epoch of each model
     
     for model_path in tqdm(model_list):
         model, device = load_model(args.model_dir + model_path, args.num_classes)
@@ -79,12 +80,14 @@ def score_analyze(test_loader, args):
         precision_list.append(precision)
         recall_list.append(recall)
         f1_list.append(f1)
+        epoch_list.append(int(re.findall(r'\d+', model_path)[0]))  
+        # Calculate the epoch of the model and add it to the list
     
     os.makedirs('./figure', exist_ok=True)
-    plt.plot(range(len(model_list)), accuracy_list, label='accuracy')
-    plt.plot(range(len(model_list)), precision_list, label='precision')
-    plt.plot(range(len(model_list)), recall_list, label='recall')
-    plt.plot(range(len(model_list)), f1_list, label='f1')
+    plt.plot(epoch_list, accuracy_list, label='accuracy')
+    plt.plot(epoch_list, precision_list, label='precision')
+    plt.plot(epoch_list, recall_list, label='recall')
+    plt.plot(epoch_list, f1_list, label='f1')
     plt.xlabel('Epoch')
     plt.ylabel('Score')
     plt.title('Score Analysis')
